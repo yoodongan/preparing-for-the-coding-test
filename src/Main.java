@@ -2,23 +2,30 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-// 배열 - 4번. 피보나치 수열
+// 배열 - 5번. 에라토스테네스 체
 public class Main {
-    public static void solution(int n) {
-        int[] arr = new int[n];
-        arr[0] = arr[1] = 1;
-        for (int i = 2; i < n; i++) {
-            arr[i] = arr[i-2] + arr[i-1];
+    public static int solution(int n) {
+        boolean[] arr = new boolean[n+1];
+        for (int i = 0; i < n + 1; i++) {
+            arr[i] = true;
         }
-        for (int x : arr) {
-            System.out.print(x+ " ");
-        }
+        arr[0] = arr[1] = false;
 
+        for (int i = 2; i <= Math.sqrt(n); i++) {
+            for (int j = i * i; j <= n; j += i) {
+                arr[j] = false;
+            }
+        }
+        int cnt =0;
+        for (int i = 0; i <= n; i++) {
+            if(arr[i]) cnt++;
+        }
+        return cnt;
     }
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int n = Integer.parseInt(br.readLine());
-        solution(n);
+        System.out.println(solution(n));
 
     }
 }

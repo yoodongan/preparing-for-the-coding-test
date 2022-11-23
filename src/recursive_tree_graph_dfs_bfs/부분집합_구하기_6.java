@@ -7,23 +7,23 @@ import java.io.InputStreamReader;
 public class 부분집합_구하기_6 {
     public static int number;
     public static int[] check;
-    public static void DFS(int n) {
-        if(n == number+1) {
+    public static void DFS(int L) {
+        if(L == number+1) {
             String tmp = "";
             for (int i = 1; i <=number; i++) {
-                if(check[i] == 1) {
-                    tmp += i + " ";
-                }
-                if (tmp.length() > 0) {
-                    System.out.println(tmp);
+                if (check[i] == 1) {
+                    tmp += (i + " ");
                 }
             }
+            if (tmp.length() > 0) {
+                System.out.println(tmp);
 
+            }
         } else {
-            check[n] = 1;
-            DFS(n+1);
-            check[n] = 0;
-            DFS(n+1);
+            check[L] = 1;
+            DFS(L+1);
+            check[L] = 0;
+            DFS(L+1);
         }
     }
     public static void main(String[] args) throws IOException {

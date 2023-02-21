@@ -1,36 +1,19 @@
 package recursive_tree_graph_dfs_bfs.practice;
 
 public class Practice {
-    int n;
-    int[] arr;
-    int m;
-    int min = Integer.MAX_VALUE;
-
-    public void dfs(int L, int sum) {
-        if(L >= min) return;
-        if(sum == m) {
-            min = Math.min(min, L);
-        }
+    static int answer;  // 조합의 답.
+    static int[][] arr = new int[34][34];  // memoization 을 위한 배열. ~33까지 써야 하므로.
+    public static int dfs(int n, int r) {
+        if(arr[n][r] > 0) return arr[n][r];
+        if(n == r || r == 1) return 1;
         else {
-            for (int i = 0; i < n; i++) {
-                dfs(L + 1, sum + arr[i]);
-            }
+            return arr[n][r] = dfs(n-1, r-1) + dfs(n-1, r);
         }
-    }
-    public void solution(int n, int[] arr, int m) {
-        this.n = n;
-        this.arr = arr;
-        this.m = m;
-        dfs(0, 0);
     }
 
     public static void main(String[] args) {
-        int n = 3;
-        int[] arr = {1,2,5};
-        int m = 15;
-        Practice p = new Practice();
-        p.solution(n, arr, m);
-        System.out.println(p.min);
+        int n = 5;
+        int r = 3;
+        System.out.println(dfs(n, r));
     }
-
 }

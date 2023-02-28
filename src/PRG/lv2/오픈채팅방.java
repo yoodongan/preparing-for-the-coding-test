@@ -1,58 +1,31 @@
 package PRG.lv2;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class 오픈채팅방 {
-    static class Record {
-        String type;
-        String id;
-        String name;
-        public Record(String t, String i, String n) {
-            this.type = t;
-            this.id = i;
-            this.name = n;
-        }
-    }
     public static String[] solution(String[] record) {
-        ArrayList<String> result = new ArrayList<>();
-        ArrayList<Record> arr = new ArrayList<>();
-        for (int i = 0; i < record.length; i++) {
+        Map<String, String> map = new HashMap<>();
+        ArrayList<String> arr = new ArrayList<>();
+        for(int i=0; i<record.length; i++) {
             String[] s = record[i].split(" ");
-            if(s.length == 2) {
-                arr.add(new Record(s[0], s[1], " "));
+            if(s[0].equals("Enter")) {
+                map.put(s[1], s[2]);  // id 와 이름 저장
+                arr.add(s[1] +"님이 들어왔습니다.");
+            } else if(s[0].equals("Leave")) {
+                arr.add(s[1] +"님이 나갔습니다.");
             } else {
-                arr.add(new Record(s[0], s[1], s[2]));
+                map.put(s[1], s[2]);
             }
         }
-        for (int i = 0; i < arr.size(); i++) {
-            if (arr.get(i).type.equals("Change")) {
-                String targetId = arr.get(i).id;
-                for (int j = 0; j < arr.size(); j++) {
-                    if(arr.get(j).id.equals(targetId)) {
-                        arr.get(j).name = arr.get(i).name;
-                    }
-                }
-            }
-        }
-        for (int i = 0; i < arr.size(); i++) {
-            if (arr.get(i).type.equals("Enter")) {
-                String message = arr.get(i).name +"님이 들어왔습니다.";
-                result.add(message);
-            }
-            if (arr.get(i).type.equals("Leave")) {
-                String message = arr.get(i).name +"님이 나갔습니다.";
-                result.add(message);
-            }
-        }
-        String[] answer = new String[result.size()];
-        for (int i = 0; i < answer.length; i++) {
-            answer[i] = result.get(i);
+        String[] answer = new String[arr.size()];
+        for(int i=0; i<answer.length; i++) {
+            String id = arr.get(i).substring(0, arr.get(i).indexOf("님"));
+            String rest = arr.get(i).substring(arr.get(i).indexOf("님"));
+            answer[i] = map.get(id) + rest;
         }
         return answer;
     }
 
-    public static void main(String[] args) {
-        String[] record = {"Enter uid1234 Muzi", "Enter uid4567 Prodo","Leave uid1234","Enter uid1234 Prodo","Change uid4567 Ryan"};
-        System.out.println(solution(record));
-    }
 }

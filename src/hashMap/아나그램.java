@@ -6,22 +6,20 @@ import java.util.Scanner;
 
 public class 아나그램 {
     public static String solution(String str1, String str2) {
-        Map<Character, Integer> hm1 = new HashMap<>();
-        Map<Character, Integer> hm2 = new HashMap<>();
-        boolean answer = true;
-        char[] char1 = str1.toCharArray();
-        for (int i = 0; i < char1.length; i++) {
-            hm1.put(char1[i], hm1.getOrDefault(char1[i], 0) + 1);
+        Map<Character, Integer> map1 = new HashMap<>();
+        Map<Character, Integer> map2 = new HashMap<>();
+        boolean flag = true;
+
+        for (int i = 0; i < str1.length(); i++) {
+            map1.put(str1.charAt(i), map1.getOrDefault(str1.charAt(i), 0) + 1);
+            map2.put(str2.charAt(i), map2.getOrDefault(str2.charAt(i), 0) + 1);
         }
-        char[] char2 = str2.toCharArray();
-        for (int i = 0; i < char2.length; i++) {
-            hm2.put(char2[i], hm2.getOrDefault(char2[i], 0) + 1);
+        for(Character key : map1.keySet()) {
+            if(map1.get(key) == map2.get(key)) continue;
+            else flag = false;
         }
-        for (char c : hm1.keySet()) {
-            if(hm1.get(c) != hm2.get(c)) answer = false;
-        }
-        if(answer) return "YES";
-        else return "NO";
+        if(!flag) return "NO";
+        else return "YES";
     }
 
     public static void main(String[] args) {

@@ -7,16 +7,19 @@ import java.util.StringTokenizer;
 
 public class 연속_부분수열_4 {
     public static int solution(int n, int m, int[] arr) {
-        int lt=0;
-        int ans=0,sum=0;
+        int sum = 0;
+        int answer = 0;
+        int lt = 0;
         for (int rt = 0; rt < n; rt++) {
-            sum+=arr[rt];
+            sum += arr[rt];
             while(sum > m) {
                 sum -= arr[lt++];
             }
-            if(sum == m) ans++;
+            if(sum == m) {
+                answer++;
+            }
         }
-        return ans;
+        return answer;
     }
 
     public static void main(String[] args) throws IOException {

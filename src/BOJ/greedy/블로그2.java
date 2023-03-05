@@ -9,10 +9,10 @@ public class 블로그2 {
     static int redCnt = 0;
     static int n;
     static int solution(String str) {
-        if (str.charAt(0) == 'B') blueCnt++;
+        if (str.charAt(0) == 'B') blueCnt++;  // 제일 처음 색깔부터 카운트.
         else redCnt++;
 
-        char prevColor = str.charAt(0);    // 이전 색깔을 저장해놓는다.
+        char prevColor = str.charAt(0);    // 이전 색깔을 저장해놓는다. (연속된 색이면 같은 색)
         for (int i = 1; i < n; i++) {
             if (str.charAt(i) == prevColor) continue;  // 이전 색깔과 현재 색깔이 같다면, 연속된 색(같은 색)이므로 그냥 넘어간다.
             else {

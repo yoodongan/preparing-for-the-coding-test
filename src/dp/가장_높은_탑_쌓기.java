@@ -6,11 +6,8 @@ import java.util.Comparator;
 import java.util.Scanner;
 
 public class 가장_높은_탑_쌓기 {
-    static class Castle implements Comparable<Castle> {
-        private int s; //넓이
-        private int h; //높이
-        private int w; //무게
-
+    static class Castle implements Comparable<Castle>{
+        int s, h, w;
         public Castle(int s, int h, int w) {
             this.s = s;
             this.h = h;
@@ -18,25 +15,23 @@ public class 가장_높은_탑_쌓기 {
         }
 
         @Override
-        public int compareTo(Castle o) {
-            return o.s - this.s;
+        public int compareTo(Castle c) {
+            return Integer.compare(c.s, this.s);
         }
     }
 
     public static int solution(ArrayList<Castle> arr, int number) {
-        int answer = 0;
-        int[] dy = new int[number];
         Collections.sort(arr);
+        int[] dy = new int[arr.size()];
         dy[0] = arr.get(0).h;
+        int answer = dy[0];
         for (int i = 1; i < number; i++) {
             int max = 0;
-            for (int j = i-1; j >=0 ; j--) {
-                if(arr.get(j).w > arr.get(i).w && dy[j] > max) {
-                    max = dy[j];
-                }
+            for (int j = i - 1; j >= 0; j--) {
+                if(arr.get(i).w < arr.get(j).w && dy[j] > max) max = dy[j];
             }
             dy[i] = max + arr.get(i).h;
-            answer = Math.max(dy[i], max);
+            answer = Math.max(answer, dy[i]);
         }
         return answer;
     }

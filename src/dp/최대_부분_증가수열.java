@@ -4,14 +4,12 @@ import java.util.Scanner;
 
 public class 최대_부분_증가수열 {
     public static int solution(int n, int[] arr) {
-        int answer = 0;
         int[] dy = new int[n];
         dy[0] = 1;
-        if(arr[1] < arr[0]) dy[1] = 1;
-        else dy[1] = 0;
-        for (int i = 2; i < n; i++) {
-            int max = Integer.MIN_VALUE;
-            for (int j = 0; j < i; j++) {
+        int answer = 0;
+        for (int i = 1; i < n; i++) {
+            int max = 0;
+            for (int j = i - 1; j >= 0; j--) {
                 if(arr[i] > arr[j] && dy[j] > max) max = dy[j];
             }
             dy[i] = max + 1;

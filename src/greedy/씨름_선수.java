@@ -14,22 +14,21 @@ public class 씨름_선수 {
 
         @Override
         public int compareTo(Player p) {
-            return Integer.compare(this.h, p.h);
+            return Integer.compare(p.h, this.h);
         }
     }
 
     public static int solution(int n, ArrayList<Player> arr) {
         Collections.sort(arr);
-        int answer = 0;
-        for (int i = 0; i < n-1; i++) {
-            for (int j = i + 1; j < n; j++) {
-                if(arr.get(i).w < arr.get(j).w) {
-                    answer++;
-                    break;
-                }
+        int answer = 1;
+        int max = arr.get(0).w;
+        for(Player p : arr) {
+            if(p.w > max) {
+                max = p.w;
+                answer++;
             }
         }
-        return n-answer;
+        return answer;
     }
 
     public static void main(String[] args) {

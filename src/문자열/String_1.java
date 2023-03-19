@@ -10,8 +10,10 @@ public class String_1 {
         str = str.toUpperCase();
         t = Character.toUpperCase(t);
         int answer = 0;
-        for (char x : str.toCharArray()) {
-            if (x == t) answer++;
+        for(Character c : str.toCharArray()) {
+            if(c == t) {
+                answer++;
+            }
         }
         return answer;
     }

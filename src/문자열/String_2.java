@@ -7,16 +7,12 @@ import java.util.Arrays;
 
 public class String_2 {
     public static String transfer(String str) {
-        char[] strChar = str.toCharArray();
-        String ans = "";
-        for(char x : strChar) {
-            if (x >= 65 && x <= 90) {
-                ans += (char)(x + 32);
-            } else if (x >= 97 && x <= 122) {
-                ans += (char)(x - 32);
-            }
+        StringBuilder sb = new StringBuilder();
+        for (char c : str.toCharArray()) {
+            if(Character.isLowerCase(c)) sb.append(Character.toUpperCase(c));
+            else sb.append(Character.toLowerCase(c));
         }
-        return ans;
+        return sb.toString();
     }
 
     public static void main(String[] args) throws IOException {

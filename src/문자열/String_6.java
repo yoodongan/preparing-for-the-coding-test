@@ -3,24 +3,23 @@ package 문자열;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.Map;
 
 public class String_6 {
     static StringBuilder sb = new StringBuilder();
     public static String solution(String str) {
-        char[] arr = str.toCharArray();
-        int[] alphabetCheck = new int[123];
-        for (int i = 97; i < 123; i++) {
-            alphabetCheck[i] = 0;
-        }
-        for (int i = 0; i<arr.length; i++) {
-            if(alphabetCheck[(int)arr[i]] >= 1) {
+        Map<Character, Integer> map = new HashMap<>();
+        StringBuilder sb = new StringBuilder();
+        for(int i=0; i<str.length(); i++) {
+            if(map.containsKey(str.charAt(i))) {
                 continue;
             } else {
-                sb.append(arr[i]);
-                alphabetCheck[(int)arr[i]]++;
+                sb.append(str.charAt(i));
+                map.put(str.charAt(i), 1);
             }
         }
-        return String.valueOf(sb);
+        return sb.toString();
 
     }
     public static void main(String[] args) throws IOException {

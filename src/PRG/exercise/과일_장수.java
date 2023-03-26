@@ -6,15 +6,16 @@ import java.util.Collections;
 public class 과일_장수 {
     public static int solution(int k, int m, int[] score) {
         int answer = 0;
-        Integer[] arr = Arrays.stream(score).boxed().toArray(Integer[]::new);
-        Arrays.sort(arr, Collections.reverseOrder());
-        int index = 0;
-        while(true) {
-            if(index >= arr.length || index + m > arr.length) {
-                break;
-            }
-            answer += arr[index + m - 1] * m;  // 내림차순이므로 제일 작은 요소가 m번 째 끝에 위치.
-            index += m;
+        Integer[] s = new Integer[score.length];
+        for(int i=0; i<s.length; i++) {
+            s[i] = score[i];
+        }
+        Arrays.sort(s, Collections.reverseOrder());
+
+        int idx = 0;
+        while(idx < s.length && idx+m <= s.length) {
+            answer+=s[idx+m-1]*m;
+            idx+=m;
         }
         return answer;
     }

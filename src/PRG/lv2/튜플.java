@@ -1,29 +1,28 @@
 package PRG.lv2;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 
 public class 튜플 {
     public static int[] solution(String s) {
         int[] answer;
-        ArrayList<Integer> arr = new ArrayList<>();
+        Set<Integer> set = new LinkedHashSet<>();
         s = s.substring(2, s.length()-2);
         s = s.replace("},{", "-");
-        String[] split = s.split("-");
+        String[] sp = s.split("-");
 
-        Arrays.sort(split, (s1, s2) -> s1.length() - s2.length());
+        Arrays.sort(sp, (s1,s2) -> s1.length() - s2.length());
 
-        for (String s1 : split) {
-            String[] tmp = s1.split(",");
-            for (String s2 : tmp) {
-                if(!arr.contains(Integer.parseInt(s2))) {
-                    arr.add(Integer.parseInt(s2));
-                }
+        for(String str : sp) {
+            String[] tmp = str.split(",");
+            for(String t : tmp) {
+                set.add(Integer.parseInt(t));
             }
         }
-        answer = new int[arr.size()];
-        for (int i = 0; i < answer.length; i++) {
-            answer[i] = arr.get(i);
+        answer = new int[set.size()];
+        int idx = 0;
+        Iterator<Integer> iter = set.iterator();
+        while(iter.hasNext()) {
+            answer[idx++] = iter.next().intValue();
         }
         return answer;
     }

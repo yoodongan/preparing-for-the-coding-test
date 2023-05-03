@@ -29,19 +29,21 @@ public class 파일명_정렬 {
         /* 문자열 split 해서 File 생성자에 담아주기. */
         File(String str) {
             int idx = 0;
-            while(idx < str.length() && str.charAt(idx) < '0' || str.charAt(idx) > '9') {
+            while(true) {
+                if(str.charAt(idx) >= '0' && str.charAt(idx) <= '9') break;
                 idx++;
             }
-            head = str.substring(0, idx);
+            this.head = str.substring(0, idx);
 
             String tmp = "";
-            while (idx < str.length() && str.charAt(idx) >= '0' && str.charAt(idx) <= '9') {
+            while (true) {
                 tmp += str.charAt(idx);
                 idx++;
+                if(idx >= str.length() || str.charAt(idx) < '0' || str.charAt(idx) > '9') break;
             }
-            number = tmp;
+            this.number = tmp;
 
-            if(idx < str.length()) tail = str.substring(idx);
+            if(idx < str.length()) this.tail = str.substring(idx);
 
         }
 

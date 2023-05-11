@@ -11,16 +11,11 @@ class Node3 {
 
 public class Tree_말단노드까지_가장_짧은_경로_dfs{
     Node3 root;
-    public static int level = 0;
-
-    public static int dfs(Node3 node) {
-        int min = Integer.MAX_VALUE;
-        if(node.lt == null && node.rt == null) {
-        }
+    public static int dfs(int L, Node3 node) {
+        if(node.lt == null && node.rt == null) return L;
         else {
-            level++;
+            return Math.min(dfs(L+1, node.lt), dfs(L+1, node.rt));
         }
-        return level;
     }
 
     public static void main(String args[]) {
@@ -30,6 +25,6 @@ public class Tree_말단노드까지_가장_짧은_경로_dfs{
         tree.root.rt=new Node3(3);
         tree.root.lt.lt=new Node3(4);
         tree.root.lt.rt=new Node3(5);
-        System.out.println(dfs(tree.root));
+        System.out.println(dfs(0, tree.root));
     }
 }

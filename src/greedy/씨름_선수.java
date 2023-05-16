@@ -3,32 +3,32 @@ package greedy;
 import java.util.*;
 
 public class 씨름_선수 {
-    static class Player implements Comparable<Player> {
-        int h; // 키
-        int w; // 몸무게
+    static class Player implements Comparable<Player>{
+        int height;
+        int weight;
 
-        public Player(int h, int w) {
-            this.h = h;
-            this.w = w;
+        public Player(int height, int weight) {
+            this.height = height;
+            this.weight = weight;
         }
 
         @Override
-        public int compareTo(Player p) {
-            return Integer.compare(p.h, this.h);
+        public int compareTo(Player o) {
+            return o.height - this.height;
         }
     }
 
     public static int solution(int n, ArrayList<Player> arr) {
         Collections.sort(arr);
-        int answer = 1;
-        int max = arr.get(0).w;
+        int max = Integer.MIN_VALUE;
+        int cnt = 0;
         for(Player p : arr) {
-            if(p.w > max) {
-                max = p.w;
-                answer++;
+            if(p.weight > max) {
+                max = p.weight;
+                cnt++;
             }
         }
-        return answer;
+        return cnt;
     }
 
     public static void main(String[] args) {

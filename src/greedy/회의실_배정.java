@@ -8,26 +8,30 @@ public class 회의실_배정 {
     static class Meeting implements Comparable<Meeting>{
         int start;
         int end;
-        Meeting(int s, int e) {
-            start = s;
-            end = e;
+
+        public Meeting(int start, int end) {
+            this.start = start;
+            this.end = end;
         }
         @Override
         public int compareTo(Meeting m) {
-            return this.end - m.end;
+            if(this.end == m.end) return this.start - m.start;
+            else return this.end - m.end;
         }
+
     }
+
     public static int solution(int n, ArrayList<Meeting> arr) {
         Collections.sort(arr);
         int endTime = 0;
-        int answer = 0;
+        int cnt = 0;
         for(Meeting m : arr) {
             if(m.start >= endTime) {
                 endTime = m.end;
-                answer++;
+                cnt++;
             }
         }
-        return answer;
+        return cnt;
     }
 
     public static void main(String[] args) {

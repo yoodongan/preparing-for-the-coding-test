@@ -16,16 +16,16 @@ public class _1_2_3_더하기 {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int t = Integer.parseInt(br.readLine());
 
-        int[] d = new int[11];
-        d[0] = 1;
-        d[1] = 1;
-        d[2] = 2;
-        for (int i = 3; i <= 10; i++) {
-            d[i] = d[i-1] + d[i-2] + d[i-3];
+        int[] dy = new int[11];
+        dy[1] = 1;
+        dy[2] = 2;
+        dy[3] = 4;
+        for (int i = 4; i <= 10; i++) {
+            dy[i] = dy[i-1] + dy[i-2] + dy[i-3];
         }
         while (t-- > 0) {
             int n = Integer.parseInt(br.readLine());
-            System.out.println(d[n]);
+            System.out.println(dy[n]);
         }
 
     }
